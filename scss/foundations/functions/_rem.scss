@@ -1,0 +1,15 @@
+// 数値をremに変換する関数です
+// @param  {Number} $target        remにしたい数値
+// @param  {Number} $threshold [1] remに変換する時の倍率
+// @return {Number}                数値にremが付いた数値を返します
+@function rem($target, $threshold: 1) {
+	@if(unit($target) != '') {
+		@error 'remにしたい数値に単位を付けないでください';
+	} @else if(unit($threshold) != '') {
+		@error 'しきい値に単位を付けないでください'
+	} @else if($target == 0) {
+		@return $target;
+	} @else {
+		@return ((($target / 16) * $threshold) * 1rem);
+	}
+}
