@@ -1,4 +1,4 @@
-# sass-javascript-demo
+# dart-sass-demo
 
 ## Installation
 ```text
