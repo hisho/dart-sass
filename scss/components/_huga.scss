@@ -1,6 +1,6 @@
 // foundationsの読み込み
 // scssの部分はwebpackの22行目aliasで定義しています。
-@use "scss/foundations/foundations" as *;
+@use "scss/foundations/_index" as *;
 
 .h1 {
 	font-size: rem(60);
