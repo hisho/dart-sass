@@ -1,13 +1,15 @@
-const webpack = require('webpack'); //webpack本体
-const path = require('path') //pathの処理
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin'); //cssを取り出す
-const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries'); //不要なjsファイルを生成しない
+//pathの処理
+const path = require('path')
+//cssを取り出す
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+//不要なjsファイルを生成しない
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 
 
-module.exports = (env,argv) => {
-  const MODE = argv.mode;
-  const IS_DEVELOPMENT = argv.mode === 'development';//開発中
-  const IS_PRODUCTION = argv.mode === 'production';//本番
+module.exports = () => {
+  const MODE = process.env.NODE_ENV;
+  const IS_DEVELOPMENT = MODE === 'development';
+  const IS_PRODUCTION = MODE === 'production';
   return {
     mode: MODE,
     devtool: IS_DEVELOPMENT ? 'inline-source-map' : 'eval',
@@ -43,7 +45,8 @@ module.exports = (env,argv) => {
             {
               loader: "sass-loader",
               options: {
-                implementation: require('sass', { //Dart SASSを使う
+                //Dart SASSを使う
+                implementation: require('sass', {
                   outputStyle : 'expanded',
                 }),
                 sassOptions: {

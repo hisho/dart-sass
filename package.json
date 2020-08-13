@@ -2,8 +2,8 @@
   "name": "dart-sass",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack -w --mode development",
-    "build": "webpack --mode production"
+    "start": "NODE_ENV=development webpack -w",
+    "build": "NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@types/node": "^14.0.27",
