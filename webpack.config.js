@@ -4,12 +4,20 @@ const path = require('path')
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 //不要なjsファイルを生成しない
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
-
+//AA用
+const asciify = require('asciify');
 
 module.exports = () => {
   const MODE = process.env.NODE_ENV;
   const IS_DEVELOPMENT = MODE === 'development';
   const IS_PRODUCTION = MODE === 'production';
+  asciify('Dart Sass', {
+    font: 'standard',
+    color: 'red',
+  }, (err, msg) => {
+    if(err) return;
+    console.log(msg);
+  });
   return {
     mode: MODE,
     devtool: IS_DEVELOPMENT ? 'inline-source-map' : 'eval',
