@@ -1,5 +1,5 @@
 //pathの処理
-const path = require('path')
+const path = require('path');
 //cssを取り出す
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 //不要なjsファイルを生成しない
@@ -11,28 +11,32 @@ module.exports = () => {
   const MODE = process.env.NODE_ENV;
   const IS_DEVELOPMENT = MODE === 'development';
   const IS_PRODUCTION = MODE === 'production';
+
+  console.log(`CURRENT MODE ${MODE}`);
+
   asciify('Dart Sass', {
     font: 'standard',
     color: 'red',
   }, (err, msg) => {
-    if(err) return;
+    if (err) return;
     console.log(msg);
   });
+
   return {
     mode: MODE,
-    devtool: IS_DEVELOPMENT ? 'inline-source-map' : 'eval',
+    devtool: IS_DEVELOPMENT ? 'inline-source-map' : false,
     entry: {
       style: './scss/style'
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname,'dist/css'),
+      path: path.resolve(__dirname, 'dist/css'),
     },
     resolve: {
       alias: {
         scss: path.resolve(__dirname, 'src/scss/'),
       },
-      extensions: ['.ts','.js','.tsx','jsx','.scss'],
+      extensions: ['.js', '.scss'],
     },
     module: {
       rules: [
@@ -55,7 +59,7 @@ module.exports = () => {
               options: {
                 //Dart SASSを使う
                 implementation: require('sass', {
-                  outputStyle : 'expanded',
+                  outputStyle: 'expanded',
                 }),
                 sassOptions: {
                   fiber: require('fibers'),
@@ -67,7 +71,7 @@ module.exports = () => {
       ]
     },
     plugins: [
-      new FixStyleOnlyEntriesPlugin(),
+      new FixStyleOnlyEntriesPlugin(), //jsを取り除く
       new ExtractCssChunks({
         filename: '[name].css',
         chunkFilename: '[id].css',
