@@ -1,0 +1,6 @@
+{
+  "reject": [
+    "webpack",
+    "sass-loader"
+  ]
+}
