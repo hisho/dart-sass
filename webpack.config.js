@@ -23,6 +23,7 @@ module.exports = () => {
   });
 
   return {
+    target: ['web', 'es5'],
     mode: MODE,
     devtool: IS_DEVELOPMENT ? 'inline-source-map' : false,
     entry: {
